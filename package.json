@@ -1,0 +1,67 @@
+{
+  "name": "medamayaki",
+  "version": "0.0.1",
+  "description": "Simple DI container",
+  "main": "index.js",
+  "engines": {
+    "node": ">=v12.10.0"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "typescript": "^3.6.4"
+  },
+  "devDependencies": {
+    "@types/express": "4.17.1",
+    "@types/jest": "24.0.18",
+    "@types/morgan": "1.7.37",
+    "@typescript-eslint/eslint-plugin": "2.3.2",
+    "@typescript-eslint/parser": "2.3.2",
+    "eslint": "6.5.1",
+    "eslint-config-prettier": "6.3.0",
+    "eslint-plugin-prettier": "3.1.1",
+    "husky": "3.0.8",
+    "jest": "24.9.0",
+    "lint-staged": "9.4.1",
+    "nodemon": "1.19.3",
+    "prettier": "1.18.2",
+    "ts-jest": "24.1.0",
+    "ts-node": "8.4.1"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "nodemon",
+    "start:dev": "ts-node src/index.ts",
+    "start:prod": "node lib/index.js",
+    "fix": "npm run prettier:fix && npm run eslint:fix",
+    "lint": "npm run prettier && npm run eslint",
+    "eslint": "eslint 'src/**/*.ts'",
+    "eslint:fix": "npm run eslint --fix",
+    "prettier": "prettier './src/**/*.ts'",
+    "prettier:fix": "npm run prettier -- --write",
+    "test": "jest",
+    "test:ci": "jest -c ./jest.config.ci.js"
+  },
+  "keywords": [],
+  "author": "@sota1235",
+  "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "npm run fix",
+      "git add"
+    ]
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src"
+    ],
+    "ext": "ts",
+    "exec": "npm run start:dev"
+  }
+}
